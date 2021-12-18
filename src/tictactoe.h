@@ -60,6 +60,29 @@ char get_key_presses()
 	return character;
 }
 
+// Terminal Custom Pixel Definiton
+class PIXEL
+{
+private:
+	int X = -1, Y = -1;
+
+public:
+	char holder = '\0';
+
+	// Get X Coordinate
+	int get_X() { return this->X; }
+
+	// Get Y Coordinate
+	int get_Y() { return this->Y; }
+
+	// Set X and Y Coordinate
+	void set_coordinate(int x, int y)
+	{
+		this->X = x;
+		this->Y = y;
+	}
+};
+
 // Terminal Handler
 class TERMINAL_HANDLER
 {
@@ -69,10 +92,82 @@ private:
 	// Get Current Terminal Dimension
 	void get_terminal_dimension();
 
+	// Display Frame
+	PIXEL** TerminalFrame;
+
 public:
 	// input thread status
 	bool thread_exit = false;
+
+	// Setup Terminal Frame
+	void set_terminal_frame();
+
+	// Dissolve Terminal Frame
+	void dissolve_terminal_frame();
+
+	// Draw Frame
+	void draw_frame();
 };
+
+void TERMINAL_HANDLER::set_terminal_frame()
+{
+	// Mandatory Function
+
+	// Free Terminal Frame
+	for (int h = 0; h < this->terminalHeight; h++)
+	{
+		delete[] this->TerminalFrame[h];
+	}
+	delete[] this->TerminalFrame;
+
+	// Get Updates
+	this->get_terminal_dimension();
+
+	// Allocate Terminal Frame
+	this->TerminalFrame = new PIXEL*[this->terminalHeight];
+	for (int h = 0; h < this->terminalHeight; h++)
+	{
+		this->TerminalFrame[h] = new PIXEL[this->terminalWidth];
+		for (int w = 0; w < this->terminalWidth; w++)
+		{
+			// set PIXEL coordinate
+			this->TerminalFrame[h][w].set_coordinate(w, h);
+			
+			// DEBUG
+			this->TerminalFrame[h][w].holder = '*';
+		}
+	}
+}
+
+void TERMINAL_HANDLER::draw_frame()
+{
+	// Clear Screen before redraw
+	system(CLEAR);
+
+	for (int h = 0; h < this->terminalHeight; h++)
+	{
+		for (int w = 0; w < this->terminalWidth; w++)
+		{
+			std::cout << this->TerminalFrame[h][w].holder;
+		}
+
+		if (h != (this->terminalHeight - 1))
+		{
+			std::cout << std::endl;
+		}
+	}
+}
+
+void TERMINAL_HANDLER::dissolve_terminal_frame()
+{
+	// Mandatory Function
+	// Free Terminal Frame
+	for (int h = 0; h < this->terminalHeight; h++)
+	{
+		delete[] this->TerminalFrame[h];
+	}
+	delete[] this->TerminalFrame;
+}
 
 void TERMINAL_HANDLER::get_terminal_dimension()
 {

@@ -17,10 +17,10 @@ void command_input(TERMINAL_HANDLER* window, char* command)
 
 	// In case Input Thread exits Late
 	// Clear Screen
-	//system(CLEAR);
+	system(CLEAR);
 
 	// DEBUG
-	std::cout << "Thread Exited\n";
+	//std::cout << "Thread Exited\n";
 }
 
 // Main Driver
@@ -45,23 +45,32 @@ int main()
 		usleep(100000);
 
 		// DEBUG
-		std::cout << "Key: " << input << std::endl;
+		//std::cout << "Key: " << input << std::endl;
 
 		if (input == '`')
 		{
 			// In case input thread exits early
-			//system(CLEAR);
+			system(CLEAR);
 
 			// DEBUG
-			std::cout << "Main Loop Exiting\n";
+			//std::cout << "Main Loop Exiting\n";
 			break;
 		}
+
+		if (!display_handler->thread_exit)
+		{
+			display_handler->set_terminal_frame();
+			display_handler->draw_frame();
+		}
+
+		std::flush(std::cout);
 	}
 
 	// wait for input thread
 	read_input.join();
 
 	// Delete Terminal Handler Instance
+	display_handler->dissolve_terminal_frame();
 	delete display_handler;
 
 	#if defined(__linux__)
