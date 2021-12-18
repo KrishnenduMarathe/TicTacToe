@@ -23,7 +23,8 @@ BUILD=$(PATH)\$(EXEC)
 else
 
 UNAME=$(shell uname -s)
-ifeq($(UNAME), Linux)
+
+ifeq ($(UNAME), Linux)
 PATH=$(shell pwd)
 SRC=$(PATH)/src/main.cpp
 
