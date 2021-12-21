@@ -5,7 +5,7 @@ void command_input(TERMINAL_HANDLER* window, char* command, int* stat)
 {
 	while (true)
 	{
-		usleep(100000);
+		sleep(1);
 		*command = 0;
 		*command = get_key_presses();
 		if (window->thread_exit || (*command == '`' && *stat == 1))
@@ -61,7 +61,7 @@ int main()
 	// Program/Game Loop
 	while (true)
 	{
-		usleep(100000);
+		sleep(1);
 
 		if (input == '`')
 		{
@@ -114,6 +114,8 @@ int main()
 				break;
 		}
 
+		std::flush(std::cout);
+
 		// check game status
 		game_state = display_handler->check_game_status();
 
@@ -124,7 +126,7 @@ int main()
 
 			while (true)
 			{
-				usleep(100000);
+				sleep(1);
 
 				if (input == 'f')
 				{
@@ -140,8 +142,6 @@ int main()
 			highlight_x = 1;
 			highlight_y = 1;
 		}
-
-		std::flush(std::cout);
 	}
 
 	// wait for input thread
