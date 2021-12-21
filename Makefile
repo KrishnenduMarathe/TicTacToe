@@ -9,14 +9,8 @@ ifeq ($(OS), Windows_NT)
 
 REMOVE=del
 SRC=.\src\main.cpp
-
-ifeq ($(win32), 1)
-EXEC:=$(EXEC)_x86.exe
-FLAGS+= -m32
-else
-EXEC:=$(EXEC)_x64.exe
-FLAGS+= -m64
-endif
+# for MingW 1.5.0
+FLAGS+= -std=c++11
 
 BUILD=.\$(EXEC)
 
