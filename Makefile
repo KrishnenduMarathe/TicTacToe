@@ -8,8 +8,7 @@ EXEC=ticTacToe
 ifeq ($(OS), Windows_NT)
 
 REMOVE=del
-PATH=$(shell cd)
-SRC=$(PATH)\src\main.cpp
+SRC=.\src\main.cpp
 
 ifeq ($(win32), 1)
 EXEC:=$(EXEC)_x86.exe
@@ -19,7 +18,7 @@ EXEC:=$(EXEC)_x64.exe
 FLAGS+= -m64
 endif
 
-BUILD=$(PATH)\$(EXEC)
+BUILD=.\$(EXEC)
 
 else
 
