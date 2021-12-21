@@ -7,6 +7,7 @@ EXEC=ticTacToe
 # Target OS Detection
 ifeq ($(OS), Windows_NT)
 
+REMOVE=del
 PATH=$(shell cd)
 SRC=$(PATH)\src\main.cpp
 
@@ -25,6 +26,7 @@ else
 UNAME=$(shell uname -s)
 
 ifeq ($(UNAME), Linux)
+REMOVE=rm
 PATH=$(shell pwd)
 SRC=$(PATH)/src/main.cpp
 
@@ -39,5 +41,5 @@ build:
 	@echo "Project Compiled"
 
 clean:
-	$(shell rm $(EXEC))
+	$(shell $(REMOVE) $(EXEC))
 	@echo "Project Cleaned"
