@@ -5,7 +5,7 @@ void command_input(TERMINAL_HANDLER* window, char* command, int* stat)
 {
 	while (true)
 	{
-		sleep(1);
+		usleep(10000);
 		*command = 0;
 		*command = get_key_presses();
 		if (window->thread_exit || (*command == '`' && *stat == 1))
@@ -61,7 +61,7 @@ int main()
 	// Program/Game Loop
 	while (true)
 	{
-		sleep(1);
+		usleep(10000);
 
 		if (input == '`')
 		{
@@ -126,7 +126,7 @@ int main()
 
 			while (true)
 			{
-				sleep(1);
+				usleep(10000);
 
 				if (input == 'f')
 				{
