@@ -9,6 +9,8 @@ ifeq ($(OS), Windows_NT)
 
 REMOVE=del
 SRC=.\src\main.cpp
+EXEC:= $(EXEC).exe
+
 # for MingW 1.5.0
 FLAGS+= -std=c++11
 
