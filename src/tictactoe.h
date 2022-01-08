@@ -6,8 +6,8 @@
 #include <unistd.h>
 
 #if defined(_WIN32)
-//#include <windows.h>
-#include <conio.h>
+#include <windows.h>
+//#include <conio.h>
 #define CLEAR "cls"
 
 HANDLE inputHandler = GetStdHandle(STD_INPUT_HANDLE);
