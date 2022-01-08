@@ -60,7 +60,7 @@ char get_key_presses()
 	if (inputEvent > 0)
 	{
 		ReadConsoleInput(inputHandler, &inputBuffer, 1, &inputEvent);
-		character = buffer.Event.KeyEvent.wVirtualKeyCode;
+		character = inputBuffer.Event.KeyEvent.wVirtualKeyCode;
 	}
 
 	#elif __linux__
