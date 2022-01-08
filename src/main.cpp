@@ -160,8 +160,10 @@ int main()
 	}
 
 	// wait for input thread
+	#if defined(__linux__)
 	read_input.join();
-
+	#endif
+	
 	// Delete Terminal Handler Instance
 	display_handler->dissolve_terminal_frame();
 	delete display_handler;
