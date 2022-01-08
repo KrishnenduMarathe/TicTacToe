@@ -56,7 +56,13 @@ int main()
 	int game_state = 1;
 
 	// Input Thread
+	#if defined(__linux__)
 	std::thread read_input (command_input, display_handler, &input, &game_state);
+	#elif _WIN32
+	HANDLE inputHandler = GetStdHandle(STD_INPUT_HANDLE);
+	DWORD inputEvent;
+	INPUT_RECORD inputBuffer;
+	#endif
 
 	// Program/Game Loop
 	while (true)
@@ -115,6 +121,15 @@ int main()
 		}
 
 		std::flush(std::cout);
+
+		#if defined(_WIN32)
+		PeekConsoleInput(inputHandler, &inputBuffer, 1, &inputEvent);
+		if (inputEvent > 0)
+		{
+			ReadConsoleInput(inputHandler, &inputBuffer, 1, &inputEvent);
+			input = inputBuffer.Event.KeyEvent.wVirtualKeyCode;
+		}
+		#endif
 
 		// check game status
 		game_state = display_handler->check_game_status();
