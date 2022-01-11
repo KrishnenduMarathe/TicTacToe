@@ -25,10 +25,10 @@
 
 #include <thread>
 
-#if defined(__unix) || defined(__unix__)
-#include "./src/tictactoe.h"
-#else
+#if defined(_WIN32) || defined(__linux__)
 #include "tictactoe.h"
+#else
+#include "./src/tictactoe.h"
 #endif
 
 void command_input(TERMINAL_HANDLER* window, char* command, int* stat)
