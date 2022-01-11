@@ -24,12 +24,7 @@
 */
 
 #include <thread>
-
-#if defined(_WIN32) || defined(__linux__)
 #include "tictactoe.h"
-#else
-#include "./src/tictactoe.h"
-#endif
 
 void command_input(TERMINAL_HANDLER* window, char* command, int* stat)
 {
@@ -58,7 +53,7 @@ int main()
 	// Number of Blocks for TicTacToe = 9
 	display_handler = new TERMINAL_HANDLER(9);
 
-	#if defined(__linux__) || defined(__unix) || defined(__unix__)
+	#if defined(__linux__)
 	struct termios terminalProps = {0};
 	setup_linux_terminal(&terminalProps);
 	#endif
@@ -181,7 +176,7 @@ int main()
 	display_handler->dissolve_terminal_frame();
 	delete display_handler;
 
-	#if defined(__linux__) || defined(__unix) || defined(__unix__)
+	#if defined(__linux__)
 	restore_linux_terminal(&terminalProps);
 	#endif
 

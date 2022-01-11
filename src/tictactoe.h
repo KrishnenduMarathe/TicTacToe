@@ -9,7 +9,7 @@
 #include <windows.h>
 #include <conio.h>
 #define CLEAR "cls"
-#elif __linux__ || __unix || __unix__
+#elif __linux__
 #include <sys/ioctl.h>
 #include <termios.h>
 
@@ -56,7 +56,7 @@ char get_key_presses()
 	{
 		character = 0;
 	}
-	#elif __linux__ || __unix || __unix__
+	#elif __linux__
 	if (read(0, &character, 1) < 0)
 	{
 		perror("read()");
@@ -612,7 +612,7 @@ void TERMINAL_HANDLER::get_terminal_dimension()
 	GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &terminalWindow);
 	this->terminalWidth = terminalWindow.srWindow.Right-terminalWindow.srWindow.Left+1;
 	this->terminalHeight = terminalWindow.srWindow.Bottom-terminalWindow.srWindow.Top+1;
-	#elif __linux__ || __unix || __unix__
+	#elif __linux__
 	struct winsize terminalWindow;
 	ioctl(STDOUT_FILENO, TIOCGWINSZ, &terminalWindow);
 	this->terminalWidth = terminalWindow.ws_col;
