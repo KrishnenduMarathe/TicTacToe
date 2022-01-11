@@ -24,7 +24,12 @@
 */
 
 #include <thread>
+
+#if defined(__unix) || defined(__unix__)
 #include "./src/tictactoe.h"
+#else
+#include "tictactoe.h"
+#endif
 
 void command_input(TERMINAL_HANDLER* window, char* command, int* stat)
 {
