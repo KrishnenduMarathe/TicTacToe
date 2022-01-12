@@ -19,9 +19,26 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 This game requires you to have a C++ build environment installed on your computer.
 (I personally used MingW-w64 to install gcc compiler for windows)
 
+Also, after a successful compilation the program might not start. I don't know why
+but Windows won't allocate memeory to ticTacToe. In that case, run the program as an
+Administrator and it will run fine.
+
 ## SCREENSHOTS
 ![alt_tag](https://github.com/KrishnenduMarathe/TicTacToe/blob/main/Screenshots/initial.png)
 
 ![alt_tag](https://github.com/KrishnenduMarathe/TicTacToe/blob/main/Screenshots/half-way.png)
 
 ![alt_tag](https://github.com/KrishnenduMarathe/TicTacToe/blob/main/Screenshots/win.png)
+
+
+## CONTROLS
+
+#### KEYS       ||    ACTION
+#### --------------------------------------------
+#####  W         =>    Move UP
+#####  A         =>    Move Left
+#####  S         =>    Move Down
+#####  D         =>    Move Right
+#####  `         =>    Exit Game
+#####  F         =>    Continue to New Game
+#####  Spacebar  =>    Select Block / Make your move
