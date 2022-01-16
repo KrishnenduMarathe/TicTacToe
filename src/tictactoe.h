@@ -571,14 +571,17 @@ void TERMINAL_HANDLER::draw_frame()
 {
 	// Mandatory Function
 
-	// Clear Screen before redraw
-	system(CLEAR);
+	// Terminal Rollback
+	std::cout << COLOR::unicode_escape+"H";
 
 	for (int h = 0; h < this->terminalHeight; h++)
 	{
 		for (int w = 0; w < this->terminalWidth; w++)
 		{
+			// Slow-mo
+			//usleep(10000);
 			std::cout << this->TerminalFrame[h][w].get_ascii()+this->TerminalFrame[h][w].holder+COLOR::reset;
+			std::flush(std::cout);
 		}
 
 		if (h != (this->terminalHeight - 1))

@@ -90,8 +90,7 @@ int main()
 
 		if (input == '`')
 		{
-			// In case input thread exits early
-			system(CLEAR);
+			display_handler->thread_exit = true;
 			break;
 		}
 
@@ -139,8 +138,6 @@ int main()
 				break;
 		}
 
-		std::flush(std::cout);
-
 		// check game status
 		game_state = display_handler->check_game_status();
 
@@ -172,6 +169,9 @@ int main()
 	// wait for input thread
 	read_input.join();
 
+	// In case Input thread finished early
+    // Clear Screen
+    system(CLEAR);
 	// Delete Terminal Handler Instance
 	display_handler->dissolve_terminal_frame();
 	delete display_handler;
