@@ -31,7 +31,6 @@ void command_input(TERMINAL_HANDLER* window, char* command, int* stat)
 	while (true)
 	{
 		usleep(100000);
-		//*command = 0;
 		*command = get_key_presses();
 		if (window->thread_exit || (*command == '`' && *stat == 1))
 		{
@@ -59,7 +58,6 @@ int main()
 	#endif
 
 	char input;
-	std::string input_buffer = "";
 
 	// Highlight Array
 	int highlight_x = 1;
