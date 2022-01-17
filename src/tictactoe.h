@@ -49,13 +49,7 @@ char get_key_presses()
 	*/
 	char character = 0;
 	#if defined(_WIN32)
-	if (kbhit() != 0)
-	{
-		character = getch();
-	} else
-	{
-		character = 0;
-	}
+	character = _getch();
 	#elif __linux__
 	if (read(0, &character, 1) < 0)
 	{

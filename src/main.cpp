@@ -31,7 +31,7 @@ void command_input(TERMINAL_HANDLER* window, char* command, int* stat)
 	while (true)
 	{
 		usleep(100000);
-		*command = 0;
+		//*command = 0;
 		*command = get_key_presses();
 		if (window->thread_exit || (*command == '`' && *stat == 1))
 		{
@@ -59,6 +59,7 @@ int main()
 	#endif
 
 	char input;
+	std::string input_buffer = "";
 
 	// Highlight Array
 	int highlight_x = 1;
@@ -83,9 +84,16 @@ int main()
 	// Input Thread
 	std::thread read_input (command_input, display_handler, &input, &game_state);
 
+	// fixes a bug where ASCII color is not detected in windows
+	bool OneTimeRefresh = true;
 	// Program/Game Loop
 	while (true)
 	{
+		if (OneTimeRefresh)
+		{
+			OneTimeRefresh = false;
+			system(CLEAR);
+		}
 		usleep(100000);
 
 		if (input == '`')
@@ -138,6 +146,9 @@ int main()
 				break;
 		}
 
+		// Reset Input
+		if (input != '`') { input = 0; }
+
 		// check game status
 		game_state = display_handler->check_game_status();
 
@@ -158,7 +169,6 @@ int main()
 
 				display_handler->set_terminal_frame(userID, true, game_state);
 				display_handler->draw_frame();
-				std::flush(std::cout);
 			}
 
 			highlight_x = 1;
