@@ -421,7 +421,10 @@ void TERMINAL_HANDLER::set_terminal_frame(int uID, bool textMode, int status)
 	delete[] this->TerminalFrame;
 
 	// Get Updates
+	int old_height = this->terminalHeight;
+	int old_width = this->terminalWidth;
 	this->get_terminal_dimension();
+	if (old_height > this->terminalHeight || old_width > this->terminalWidth) { system(CLEAR); }
 
 	// testMode = true
 	std::string textToDisplay;
