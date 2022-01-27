@@ -60,7 +60,7 @@ char get_key_presses()
 	return character;
 }
 
-// Ansi Color Codes
+// Ascii Color Codes
 /*FROM:
 ** https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797
 */
